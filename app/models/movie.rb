@@ -15,9 +15,4 @@ class Movie < ActiveRecord::Base
     Movie.where(:director => director)
   end
 
-  def self.movies_with_same_director(director)
-    other_movies = Movie.where(:director => director)
-    other_movies.reject { |m| m.id == movie.id }
-  end
-  
 end

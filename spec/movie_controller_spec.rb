@@ -24,7 +24,7 @@ describe MoviesController, type: :controller do
   # find movies with siilar director
 
   describe 'find movie with same director' do
-    it 'returns the correct matches for movies by the same director' do
+    it 'returns the correct matches for movies with the same director' do
       get :select_by_director, {:id => Movie.find_by_title("Les Misérables")}
       movie = Movie.find_by_title("Les Misérables")
       movie_by_director = Movie.search_directors(movie.director).where.not(title: "Les Misérables")
@@ -59,7 +59,7 @@ describe MoviesController, type: :controller do
       id = movie.id
       expect(Movie).to receive(:find).and_return(movie)
       
-      get :edit, id: id
+      get :edit, {id: id}
       expect(response).to render_template(:edit)
       movie.destroy
     end
@@ -81,7 +81,7 @@ describe MoviesController, type: :controller do
     it "deletes the movie selected" do
       movie = Movie.create(:title => "Shrek 2", :rating => "PG", :release_date => "2004-05-19")
       id = movie.id
-      delete :destroy, id: id
+      delete :destroy, {id: id}
       expect(flash[:notice]).to match(/Movie || deleted./)
       expect(response).to redirect_to(movies_path)
     end

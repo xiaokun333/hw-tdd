@@ -40,34 +40,13 @@ class MoviesController < ApplicationController
   end
 
   def select_by_director
-    #select movie by director
-    # @movie = Movie.find(params[:id])
-    # @director = @movie.director
-    # other_movies = Movie.search_directors(@movie.director).where.not(title: @movie.title)
-    # if other_movies.search_directors(@director).length == 0
-    #   flash[:warning] = "'#{@movie.title}' has no director info" 
-    #   redirect_to movies_path
-    # end
     @movie = Movie.find(params[:id])
-    if @movie.director.blank?
-      flash[:notice] = "'#{@movie.title}' has no director info"
+    if @movie.director.empty?
+      flash[:notice] = "'#{@movie.title}' has no director info."
       redirect_to movies_path
     else
       @movies = Movie.search_directors(@movie.director) 
     end
-    @movie = Movie.find(params[:id])
-    
-    # if @movie.director.blank?
-    #   flash[:notice] = "'#{@movie.title}' has no director info."
-    #   redirect_to root_path
-    # else
-    #   @movies_with_same_director = Movie.where(director: @movie.director)
-  
-    #   if @movies_with_same_director.any?
-    #     redirect_to search_directors_path
-    #   end
-    # end
-
   end
   
   private
