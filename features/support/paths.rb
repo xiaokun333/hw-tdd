@@ -20,6 +20,23 @@ module NavigationHelpers
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
+    
+    # edit page mapping
+    when /^the edit page for "([^"]*)"$/ 
+      edit_movie_path(Movie.find_by_title($1).id)
+    
+    # page detail
+    when /^the details page for "([^"]*)"$/
+      movie_path(Movie.find_by_title($1).id)
+      
+    when /^the Similar Movies page for "([^"]*)"$/
+      search_directors_path(Movie.find_by_title($1).id)
+      
+    # add new movie
+    when /^the create page/
+      new_movie_path()
+    
+
 
     else
       begin
